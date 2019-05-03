@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+            android:layout_height="match_parent"
+android:fillViewport="true">
+        <android.support.constraint.ConstraintLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".RegistroUsuario">
+
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="Nombre"
+                    android:ems="10"
+                    android:id="@+id/edt_nombre" android:layout_marginEnd="24dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="32dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:backgroundTint="@color/colorPrimary"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="Apellido paterno"
+                    android:ems="10"
+                    android:id="@+id/edt_ap_paterno" android:layout_marginEnd="24dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="24dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/edt_nombre"
+                    android:backgroundTint="@color/colorPrimary"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="Apellido materno"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:ems="10"
+                    android:id="@+id/edt_ap_materno" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_ap_paterno" android:layout_marginEnd="24dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:ems="10"
+                    android:hint="Email"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:id="@+id/edt_correo" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_ap_materno" android:layout_marginEnd="24dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="Usuario"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:ems="10"
+                    android:id="@+id/edt_nick" android:layout_marginEnd="24dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_correo"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="Contraseña"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:ems="10"
+                    android:id="@+id/edt_password" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_nick" android:layout_marginEnd="24dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="24dp"
+                    app:layout_constraintStart_toStartOf="parent"/>
+            <Button
+                    android:text="Registrar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_registrar" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/edt_password"
+                    android:background="@drawable/button_rounded" android:onClick="CreaUsuario"/>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>

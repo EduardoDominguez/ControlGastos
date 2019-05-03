@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+    <android.support.constraint.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".RegistroUsuario">
+
+        <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Nombre dei ingreso"
+                android:ems="10"
+                android:id="@+id/edt_nombre" android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="32dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:backgroundTint="@color/colorPrimary"/>
+        <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:hint="Cantidad"
+                android:ems="10"
+                android:id="@+id/edt_cantidad" android:layout_marginEnd="24dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="24dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/edt_nombre"
+                android:backgroundTint="@color/colorPrimary"/>
+
+
+        <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:ems="10"
+                android:id="@+id/edt_fecha_ingreso"
+                android:hint="Fecha del ingreso"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="24dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/edt_cantidad"/>
+
+
+        <Button
+                android:text="Registrar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_registrar"
+                android:background="@drawable/button_rounded" android:onClick="CreaUsuario"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="32dp"
+                app:layout_constraintTop_toBottomOf="@+id/edt_fecha_ingreso"/>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
