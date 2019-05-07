@@ -15,6 +15,8 @@ import mx.univa.controldegastos.model.response.LoginResponse
 import mx.univa.controldegastos.resourses.globales
 import mx.univa.controldegastos.service.ApiService
 import mx.univa.controldegastos.service.LoginService
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,10 +39,16 @@ class LoginActivity : AppCompatActivity() {
         txtUser = findViewById(R.id.edt_user) as EditText
         txtPassword = findViewById(R.id.edt_password) as EditText
 
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BODY
+        val httpClient = OkHttpClient.Builder()
+        httpClient.addInterceptor(logging)
+
 
         val retrofit : Retrofit = Retrofit.Builder()
             .baseUrl(globales.URL_WS)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(httpClient.build())
             .build()
 
         service = retrofit.create<ApiService>(ApiService::class.java)
@@ -49,9 +57,10 @@ class LoginActivity : AppCompatActivity() {
 
     fun IniciarSesion(view :View){
         if(txtUser?.text.toString().trim().equals(""))
-            Toast.makeText(this, "Ingrese usuario", Toast.LENGTH_LONG).show()
+            txtUser?.error = "Ingrese usuario"
+            //Toast.makeText(this, "Ingrese usuario", Toast.LENGTH_LONG).show()
         else if(txtPassword?.text.toString().trim().equals(""))
-            Toast.makeText(this, "Ingrese contraseña", Toast.LENGTH_LONG).show()
+            txtPassword?.error = "Ingrese contraseña"
         else{
             progressBar.visibility = View.VISIBLE
 
@@ -72,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
         service.getPing().enqueue(object: Callback<Boolean>{
             override fun onResponse(call: Call<Boolean>?, response: Response<Boolean>?) {
                 val ping = response?.body()
-                Log.i(globales.TAG_LOGS, Gson().toJson(ping))
+                //Log.i(globales.TAG_LOGS, Gson().toJson(ping))
             }
             override fun onFailure(call: Call<Boolean>?, t: Throwable?) {
                 t?.printStackTrace()
@@ -93,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
         serviceLogin.getLogin(request).enqueue(object: Callback<LoginResponse>{
             override fun onResponse(call: Call<LoginResponse>?, response: Response<LoginResponse>?) {
                 val respuesta = response?.body()
-                Log.i(globales.TAG_LOGS, Gson().toJson(respuesta))
+                //Log.i(globales.TAG_LOGS, Gson().toJson(respuesta))
                 progressBar.visibility = View.GONE
                 if(respuesta!!.isExito()){
                     i.putExtra("estado_sesion", true)

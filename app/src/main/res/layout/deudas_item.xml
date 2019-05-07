@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:paddingLeft="5dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/colorAccent"
+              android:id="@+id/ingresos_item"
+              android:paddingBottom="2dp">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+    >
+        <TextView
+                android:id="@+id/txv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="@tools:sample/lorem"
+                android:padding="@dimen/spacing"
+                android:layout_margin="@dimen/spacing"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
+
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:text="Día corte"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView"
+                    android:layout_weight="20"
+                    android:padding="@dimen/spacing"
+                    tools:text="Día corte"
+                    android:layout_margin="@dimen/spacing"/>
+
+            <TextView
+                    android:id="@+id/txv_dia_corte"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="@tools:sample/lorem"
+                    android:layout_weight="25"
+                    android:padding="@dimen/spacing"
+                    android:layout_margin="@dimen/spacing"/>
+            <TextView
+                    android:text="Día límite pago"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView2"
+                    tools:text="Día límite pago"
+                    android:layout_weight="20"
+                    android:padding="@dimen/spacing"
+                    android:layout_margin="@dimen/spacing"/>
+
+            <TextView
+                    android:id="@+id/txv_dia_limite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="@tools:sample/lorem"
+                    android:layout_weight="25"
+                    android:padding="@dimen/spacing"
+                    android:layout_margin="@dimen/spacing"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

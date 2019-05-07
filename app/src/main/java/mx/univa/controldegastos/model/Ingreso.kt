@@ -1,11 +1,12 @@
 package mx.univa.controldegastos.model
 
 class Ingreso {
-    var IdIngreso: Int = 0
+
+    var idingreso: Int = 0
         get()=field
         set(value){field = value}
 
-    var Nombre : String = ""
+    var nombre : String = ""
         get()=field
         set(value){field = value}
 
@@ -13,11 +14,13 @@ class Ingreso {
         get()=field
         set(value){field = value}
 
-    var CantidadInicial: Double = 0.0
+    var cantidad_inicial: Double = 0.0
         get()=field
         set(value){field = value}
 
-    var CantidadActual: Double = 0.0
+    var cantidad_actual: Double = 0.0
         get()=field
         set(value){field = value}
+
+    override fun toString(): String = this.nombre
 }

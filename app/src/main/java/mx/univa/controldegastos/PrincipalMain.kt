@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
@@ -14,15 +13,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_principal_main.*
 import kotlinx.android.synthetic.main.app_bar_principal_main.*
-import kotlinx.android.synthetic.main.nav_header_principal_main.*
-import kotlinx.android.synthetic.main.nav_header_principal_main.view.*
-import mx.univa.controldegastos.fragments.FragmentDeudas
-import mx.univa.controldegastos.fragments.FragmentGastos
-import mx.univa.controldegastos.fragments.FragmentIngresos
-import mx.univa.controldegastos.fragments.FragmentInicio
+import mx.univa.controldegastos.fragments.*
 import mx.univa.controldegastos.resourses.globales
 
 class PrincipalMain : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -52,14 +45,19 @@ class PrincipalMain : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
 
         val bundle = intent.extras
-        if(bundle != null && bundle.get("estado_sesion") != null)
+        if(bundle != null && bundle.get("estado_sesion") != null){
             getData(bundle)
+            CargarFragment(FragmentInicio())
+            nav_view.menu.getItem(0).setChecked(true)
+        }
         else if(!obtieneEstadoSesion()){
             enviarALogin()
         }else{
-            txtUserHeader?.text = obtieneCorreoSesion()
-            txtCorreoHeader?.text = obtieneNombreCompletoSesion()
-            //CargarFragment(FragmentInicio())
+            //txtUserHeader?.text = obtieneCorreoSesion()
+            //txtCorreoHeader?.text = obtieneNombreCompletoSesion()
+            CargarFragment(FragmentInicio())
+            nav_view.menu.getItem(0).setChecked(true)
+
         }
     }
 
@@ -82,7 +80,7 @@ class PrincipalMain : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.action_settings -> return true
+            //R.id.action_settings -> return true
             else -> return super.onOptionsItemSelected(item)
         }
     }
@@ -90,22 +88,29 @@ class PrincipalMain : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
+            R.id.nav_home -> {
+                // Handle the camera action
+                CargarFragment(FragmentInicio())
+            }
             R.id.nav_ingresos -> {
                 // Handle the camera action
                 CargarFragment(FragmentIngresos())
             }
-            R.id.nav_gastos -> {
+            /*R.id.nav_gastos -> {
                 CargarFragment(FragmentGastos())
-            }
+            }*/
             R.id.nav_deudas -> {
                 CargarFragment(FragmentDeudas())
             }
-            R.id.nav_manage -> {
-
+            R.id.nav_abonos -> {
+                CargarFragment(FragmentAbonos())
             }
-            R.id.nav_perfil -> {
-
+            R.id.nav_cargos -> {
+                CargarFragment(FragmentCargos())
             }
+            /*R.id.nav_password -> {
+
+            }*/
             R.id.nav_cerrar_sesion -> {
                 guardaEstadoSesion(false)
                 enviarALogin()
@@ -136,14 +141,11 @@ class PrincipalMain : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                 id_usuario = Integer.parseInt(bundle.get("id_usuario").toString())
 
 
-
-
             guardaEstadoSesion(estado_sesion, id_usuario, bundle.get("usuario").toString(), correo, nombre_completo)
 
             txtCorreoHeader?.text = obtieneCorreoSesion()
             txtUserHeader?.text = obtieneNombreCompletoSesion()
 
-            //Toast.makeText(this, bundle.get("usuario").toString(), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -174,7 +176,6 @@ class PrincipalMain : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     fun obtieneNombreCompletoSesion(): String {
         var preferences : SharedPreferences = getSharedPreferences(globales.STRING_PREFERENCES, Context.MODE_PRIVATE)
         return preferences.getString(globales.PREFERENCE_NOMBRE, "")
-        return preferences.getString(globales.PREFERENCE_NOMBRE, "")
     }
 
     fun obtieneCorreoSesion(): String {
@@ -189,14 +190,15 @@ class PrincipalMain : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     fun CargarFragment(fragmento: Fragment){
-        var fm = getSupportFragmentManager();
+        /*var fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.contenedor, fragmento).commit()
-
-        /*val transaction = getSupportFragmentManager().beginTransaction()
+        */
+        val transaction = getSupportFragmentManager().beginTransaction()
         transaction.replace(R.id.contenedor, fragmento)
         transaction.addToBackStack(null)
-        transaction.commit()*/
+        transaction.commit()
     }
+
 
     fun onFragmentInteraction(uri: Uri) {}
 }

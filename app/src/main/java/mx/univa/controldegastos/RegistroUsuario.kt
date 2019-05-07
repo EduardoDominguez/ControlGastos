@@ -67,7 +67,7 @@ class RegistroUsuario : AppCompatActivity() {
             service.creaUsuario(request).enqueue(object: Callback<Respuesta> {
                 override fun onResponse(call: Call<Respuesta>?, response: Response<Respuesta>?) {
                     val respuesta = response?.body()
-                    Log.i(globales.TAG_LOGS, Gson().toJson(respuesta))
+                    //Log.i(globales.TAG_LOGS, Gson().toJson(respuesta))
 
                     if(respuesta!!.isExito()){
                         Toast.makeText(contexto, "Registrado con éxito", Toast.LENGTH_LONG).show()
@@ -91,34 +91,40 @@ class RegistroUsuario : AppCompatActivity() {
         var blnRespuesta = true
 
         if(txtNombre?.text.toString().trim().isNullOrEmpty()){
-            Toast.makeText(this, "Ingrese su nombre", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "Ingrese su nombre", Toast.LENGTH_LONG).show()
+            txtNombre?.error = "Ingrese su nombre"
             blnRespuesta = false
         }
 
         if(txtAppaterno?.text.toString().trim().isNullOrEmpty()){
-            Toast.makeText(this, "Ingrese su apellido paterno", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "Ingrese su apellido paterno", Toast.LENGTH_LONG).show()
+            txtAppaterno?.error = "Ingrese su apellido paterno"
             blnRespuesta = false
         }
 
 
         if(txtApmaterno?.text.toString().trim().isNullOrEmpty()){
-            Toast.makeText(this, "Ingrese su apellido materno", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "Ingrese su apellido materno", Toast.LENGTH_LONG).show()
+            txtApmaterno?.error = "Ingrese su apellido materno"
             blnRespuesta = false
         }
 
 
         if(txtEmail?.text.toString().trim().isNullOrEmpty()){
-            Toast.makeText(this, "Ingrese su correo", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "Ingrese su correo", Toast.LENGTH_LONG).show()
+            txtEmail?.error = "Ingrese su correo"
             blnRespuesta = false
         }
 
         if(txtNick?.text.toString().trim().isNullOrEmpty()){
-            Toast.makeText(this, "Ingrese su nombre de usuario (nick)", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "Ingrese su nombre de usuario (nick)", Toast.LENGTH_LONG).show()
+            txtNick?.error = "Ingrese su nombre de usuario (nick)"
             blnRespuesta = false
         }
 
-        if(txtEmail?.text.toString().trim().isNullOrEmpty()){
-            Toast.makeText(this, "Ingrese su contraseña", Toast.LENGTH_LONG).show()
+        if(txtPassword?.text.toString().trim().isNullOrEmpty()){
+            //Toast.makeText(this, "Ingrese su contraseña", Toast.LENGTH_LONG).show()
+            txtPassword?.error = "Ingrese su contraseña"
             blnRespuesta = false
         }
 

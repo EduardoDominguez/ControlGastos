@@ -1,7 +1,6 @@
 package mx.univa.controldegastos.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -32,12 +31,12 @@ class AdaptadorIngresos(ingresoList: List<Ingreso>, internal var context: Contex
     override fun onBindViewHolder(holder: AdaptadorIngresos.IngresosViewHolder,
                                   position: Int) {
         val ingreso = ingresoList[position]
-        holder.name.text = ingreso.Nombre
+        holder.name.text = ingreso.nombre
 
-        var format = NumberFormat.getCurrencyInstance(Locale.ENGLISH);
+        var format = NumberFormat.getCurrencyInstance();
 
-        holder.cantidad_actual.text = format.format(ingreso.CantidadActual).toString()
-        holder.cantidad_inicial.text = format.format(ingreso.CantidadInicial).toString().toString()
+        holder.cantidad_actual.text = format.format(ingreso.cantidad_actual).toString()
+        holder.cantidad_inicial.text = format.format(ingreso.cantidad_inicial).toString()
         holder.itemView.setOnClickListener {
             /*val i = Intent(context, PersonFormActivity::class.java)
             i.putExtra("Mode", "E")

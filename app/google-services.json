@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "812190846723",
+    "firebase_url": "https://controldegastos-32600.firebaseio.com",
+    "project_id": "controldegastos-32600",
+    "storage_bucket": "controldegastos-32600.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812190846723:android:71071c82db196624",
+        "android_client_info": {
+          "package_name": "mx.univa.controldegastos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "812190846723-04bmafkvca5krdjummhjsgav69kpue1m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.univa.controldegastos",
+            "certificate_hash": "fe9ff3a6164ad0088ca3e44220fe32cec78be1ce"
+          }
+        },
+        {
+          "client_id": "812190846723-g55fillhmbboaigg1mvn4i0ldofhe31b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqlGY8MgMtRkXz7ACh5DQ0eHNFQWZ4Gf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "812190846723-g55fillhmbboaigg1mvn4i0ldofhe31b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -11,6 +11,7 @@ class globales {
         val PREFERENCE_NOMBRE = "NOMBRE.SESION"
         val PREFERENCE_ID_USUARIO = "IDUSUARIO.SESION"
         val URL_WS = "http://www.reddam.com.mx/servicios/WSDeudas/api/"
+        //val URL_WS = "http://192.168.1.72:58991/api/"
         val TAG_LOGS = "DEUDAS: "
     }
 
