@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "812190846723-n16j2boko5e553o2llshtnse2vpilb9g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.univa.controldegastos",
+            "certificate_hash": "b5b8bbfa983f8d13bcf710606acdcf2a1ebed2d7"
+          }
+        },
+        {
           "client_id": "812190846723-i70a7lrel2d54kji4p1te820ls99ffp3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

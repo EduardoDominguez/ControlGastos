@@ -43,8 +43,6 @@ class LoginActivity : AppCompatActivity() {
         logging.level = HttpLoggingInterceptor.Level.BODY
         val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor(logging)
-
-
         val retrofit : Retrofit = Retrofit.Builder()
             .baseUrl(globales.URL_WS)
             .addConverterFactory(GsonConverterFactory.create())

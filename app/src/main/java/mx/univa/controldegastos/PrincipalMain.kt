@@ -11,13 +11,21 @@ import android.support.v4.app.NotificationCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_principal_main.*
 import kotlinx.android.synthetic.main.app_bar_principal_main.*
 import mx.univa.controldegastos.fragments.*
+import mx.univa.controldegastos.model.Respuesta
+import mx.univa.controldegastos.model.request.ActualizaTokenNotificacionRequest
 import mx.univa.controldegastos.resourses.globales
+import mx.univa.controldegastos.service.NotificacionService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PrincipalMain : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -52,6 +60,7 @@ class PrincipalMain : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             getData(bundle)
             CargarFragment(FragmentInicio())
             nav_view.menu.getItem(0).setChecked(true)
+            actualizaTokenFirebase(obtieneTokenFirebase())
         }
         else if(!obtieneEstadoSesion()){
             enviarALogin()
@@ -60,10 +69,33 @@ class PrincipalMain : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             //txtCorreoHeader?.text = obtieneNombreCompletoSesion()
             CargarFragment(FragmentInicio())
             nav_view.menu.getItem(0).setChecked(true)
-
+            actualizaTokenFirebase(obtieneTokenFirebase())
         }
     }
 
+    //obtieneTokenFirebase
+
+    fun actualizaTokenFirebase(pToken : String){
+        if(!pToken.isNullOrEmpty()){
+            val globales = globales()
+            val service = globales.getService().create<NotificacionService>(NotificacionService::class.java)
+
+            var request = ActualizaTokenNotificacionRequest()
+            request.IdUsuario = obtieneIdUsuarioSesion()
+            request.Token = pToken
+            service.actualizaToken(request).enqueue(object: Callback<Respuesta> {
+                override fun onResponse(call: Call<Respuesta>?, response: Response<Respuesta>?) {
+                    val respuesta = response?.body()
+                    Log.i("FIREBASE: ", Gson().toJson(respuesta))
+                    guardaTokenFirebase("")
+                }
+                override fun onFailure(call: Call<Respuesta>?, t: Throwable?) {
+                    t?.printStackTrace()
+                    //Toast.makeText(contexto, "No se pudo obtener acceso a internet, favor de intentarlo más tarde", Toast.LENGTH_LONG).show()
+                }
+            })
+        }
+    }
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -184,6 +216,16 @@ class PrincipalMain : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     fun obtieneCorreoSesion(): String {
         var preferences : SharedPreferences = getSharedPreferences(globales.STRING_PREFERENCES, Context.MODE_PRIVATE)
         return preferences.getString(globales.PREFERENCE_CORREO, "")
+    }
+
+    fun guardaTokenFirebase(pToken :String){
+        var preferences : SharedPreferences = getSharedPreferences(globales.STRING_PREFERENCES, Context.MODE_PRIVATE)
+        preferences.edit().putString(globales.PREFERENCE_TOKEN_FIREBASE, pToken).apply()
+    }
+
+    fun obtieneTokenFirebase() : String{
+        var preferences : SharedPreferences = getSharedPreferences(globales.STRING_PREFERENCES, Context.MODE_PRIVATE)
+        return preferences.getString(globales.PREFERENCE_TOKEN_FIREBASE, "")
     }
 
     fun enviarALogin(){
