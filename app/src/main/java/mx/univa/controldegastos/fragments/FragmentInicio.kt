@@ -81,39 +81,42 @@ class FragmentInicio : Fragment() {
         var actividad = activity as? PrincipalMain
         var request = actividad?.obtieneIdUsuarioSesion() //Obtener Id Usuario
 
-        progress?.visibility = View.VISIBLE
-        serviceDeudas.getTotalDeudas(request!!).enqueue(object: Callback<TotalDeudasResponse> {
-            override fun onResponse(call: Call<TotalDeudasResponse>?, response: Response<TotalDeudasResponse>?) {
-                val respuesta = response?.body()
-                //Log.i(globales.TAG_LOGS, Gson().toJson(respuesta))
-                val format = NumberFormat.getCurrencyInstance()
-                if(respuesta != null){
-                    if(respuesta!!.isExito()){
-                        val resuesta = respuesta.Total
-                        val respuesta = respuesta?.Total
+        if(request != null){
+            progress?.visibility = View.VISIBLE
+            serviceDeudas.getTotalDeudas(request!!).enqueue(object: Callback<TotalDeudasResponse> {
+                override fun onResponse(call: Call<TotalDeudasResponse>?, response: Response<TotalDeudasResponse>?) {
+                    val respuesta = response?.body()
+                    //Log.i(globales.TAG_LOGS, Gson().toJson(respuesta))
+                    val format = NumberFormat.getCurrencyInstance()
+                    if(respuesta != null){
+                        if(respuesta!!.isExito()){
+                            val resuesta = respuesta.Total
+                            val respuesta = respuesta?.Total
 
-                        txv_cantidad_gastos?.text = format.format(respuesta).toString()
-                        totalDeudas= respuesta
+                            txv_cantidad_gastos?.text = format.format(respuesta).toString()
+                            totalDeudas= respuesta
 
-                        txv_diferencia?.text = format.format(totalIngresos - totalDeudas).toString()
+                            txv_diferencia?.text = format.format(totalIngresos - totalDeudas).toString()
 
-                        //Log.i(globales.TAG_LOGS, resuesta.toString())
+                            //Log.i(globales.TAG_LOGS, resuesta.toString())
+                        }else{
+
+                            Toast.makeText(activity, respuesta.getMensaje(), Toast.LENGTH_LONG).show()
+                        }
                     }else{
-
-                        Toast.makeText(activity, respuesta.getMensaje(), Toast.LENGTH_LONG).show()
+                        txv_cantidad_gastos?.text = format.format(0).toString()
+                        Toast.makeText(activity, "No se pudo llamar al WS", Toast.LENGTH_SHORT).show()
                     }
-                }else{
-                    txv_cantidad_gastos?.text = format.format(0).toString()
-                    Toast.makeText(activity, "No se pudo llamar al WS", Toast.LENGTH_SHORT).show()
+                    progress?.visibility = View.GONE
                 }
-                progress?.visibility = View.GONE
-            }
-            override fun onFailure(call: Call<TotalDeudasResponse>?, t: Throwable?) {
-                t?.printStackTrace()
-                Toast.makeText(activity, "No se pudo comunicar con el servicio, favor de intentarlo más tarde", Toast.LENGTH_LONG).show()
-                progress?.visibility = View.GONE
-            }
-        })
+                override fun onFailure(call: Call<TotalDeudasResponse>?, t: Throwable?) {
+                    t?.printStackTrace()
+                    Toast.makeText(activity, "No se pudo comunicar con el servicio, favor de intentarlo más tarde", Toast.LENGTH_LONG).show()
+                    progress?.visibility = View.GONE
+                }
+            })
+        }
+
     }
 
     fun getTotalIngresos(){

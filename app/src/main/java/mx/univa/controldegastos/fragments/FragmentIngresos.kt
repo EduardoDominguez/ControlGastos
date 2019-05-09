@@ -113,9 +113,9 @@ class FragmentIngresos : Fragment() {
                         adaptadorIngreos = AdaptadorIngresos(ingresoList = listaIngresos, context = context!!)
                         (recyclerIngresos as RecyclerView).adapter = adaptadorIngreos
                         //Log.i(globales.TAG_LOGS, listaIngresos.toString())
-                    }else{
+                    }/*else{
                         Toast.makeText(activity, respuesta.getMensaje(), Toast.LENGTH_LONG).show()
-                    }
+                    }*/
                 }else{
                     Toast.makeText(activity, "No se puedo llamar el servicio", Toast.LENGTH_LONG).show()
                 }

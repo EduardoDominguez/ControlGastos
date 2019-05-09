@@ -1,10 +1,12 @@
 package mx.univa.controldegastos.service
 
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.media.RingtoneManager
 import android.support.v4.app.NotificationCompat
 import android.util.Log
@@ -66,6 +68,21 @@ class FirebaseService : FirebaseMessagingService() {
                     Context.NOTIFICATION_SERVICE) as NotificationManager
 
             val channelID = "mx.univa.controldegastos"
+            val name = "my_channel"
+            val Description = "This is my channel"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
+                val mChannel = NotificationChannel(channelID, name, importance)
+                mChannel.setDescription(Description)
+                mChannel.enableLights(true)
+                mChannel.setLightColor(Color.RED)
+                mChannel.enableVibration(true)
+                mChannel.setVibrationPattern(longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400))
+                mChannel.setShowBadge(false)
+                notificationManager?.createNotificationChannel(mChannel)
+            }
+
             var likeIntent : Intent = Intent(this, PrincipalMain::class.java)
             var likePendingIntent = PendingIntent.getService(this, 1, likeIntent,PendingIntent.FLAG_ONE_SHOT)
 
@@ -74,10 +91,10 @@ class FirebaseService : FirebaseMessagingService() {
                 .setContentTitle( remoteMessage.notification!!.title)
                 .setContentText( remoteMessage.notification!!.body!!)
                 .setChannelId(channelID)
-                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
+                .setVibrate(longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400))
                 .setAutoCancel(true)
-                .addAction(R.drawable.ic_menu_camera,
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                .addAction(R.drawable.logo,
                     getString(R.string.title_activity_principal_main),likePendingIntent)
                 .setContentIntent(pendingIntent)
             notificationManager?.notify(600, notificacion.build())

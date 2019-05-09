@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
 
             getLogin()
 
-            getPing()
+            //getPing()
 
         }
     }

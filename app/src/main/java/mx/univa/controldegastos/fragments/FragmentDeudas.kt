@@ -109,9 +109,9 @@ class FragmentDeudas : Fragment() {
                     adaptadorDeudas = AdaptadorDeudas(deudaList = listaDeudas, context = context!!)
                     (recyclerDeudas as RecyclerView).adapter = adaptadorDeudas
                     //Log.i(globales.TAG_LOGS, listaDeudas.toString())
-                }else{
-                    Toast.makeText(activity, respuesta.getMensaje(), Toast.LENGTH_LONG).show()
-                }
+                }/*else{
+                        Toast.makeText(activity, respuesta.getMensaje(), Toast.LENGTH_LONG).show()
+                 }*/
 
                 progress?.visibility = View.GONE
 
